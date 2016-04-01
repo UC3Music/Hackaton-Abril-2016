@@ -27,8 +27,12 @@ void loop() {
     buttonStates[i] = digitalRead(buttonPins[i]);
 
     if (buttonStates[i] == HIGH) {
-      if (altavozUno) tone(altavozPins[0], notes[i],50);
-      else tone(altavozPins[1], notes[i],50)
+      if (altavozUno) {
+        tone(altavozPins[0], notes[i],50);
+      }
+      else {
+        tone(altavozPins[1], notes[i],50);
+      }
     } else {
       //noTone(altavozPin);  // messes things up
     }
