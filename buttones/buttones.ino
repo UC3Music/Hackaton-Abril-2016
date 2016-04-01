@@ -1,7 +1,6 @@
 #include "pitches.h"
 
 
-
 // los tonos 
 int notes[] = { NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4, NOTE_B4 };
 
@@ -10,8 +9,10 @@ int buttonPins[] = { 2, 3, 4, 5, 6, 7, 8 };
 // los estados de los bottones (indeces corresponden a los de buttonPins)
 int buttonStates[] = { 0, 0, 0, 0, 0, 0, 0 };
 
-//el pin del altavoz
-const int altavozPin = 9;
+// el pin del altavoz
+int altavozPins[] = { 9, 10 };
+// cual altavoz va a sonar; si es true, suena el primero en la lista.
+bool altavozUno = true; 
 
 void setup() {
   for (int i = 0; i < 7; i++) { // el tamano de buttonPins
@@ -21,16 +22,20 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  
   for (int i = 0; i < 7; i++) { // el tamano de notes
     buttonStates[i] = digitalRead(buttonPins[i]);
 
     if (buttonStates[i] == HIGH) {
-      tone(altavozPin, notes[i],50);
+      if (altavozUno) tone(altavozPins[0], notes[i],50);
+      else tone(altavozPins[1], notes[i],50)
     } else {
       //noTone(altavozPin);  // messes things up
     }
     
   }
-  
+
 }
+
+
+
