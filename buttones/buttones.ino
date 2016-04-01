@@ -17,6 +17,7 @@ int buttonState = 0;
 // el pin del altavoz
 int altavozPins[] = { 10 };
 
+bool toggle;
 
 void setup() {
   myservo.attach(11);
@@ -25,7 +26,8 @@ void setup() {
   for (int i = 0; i < 8; i++) { // el tamano de buttonPins
     pinMode(buttonPins[i], INPUT);
   }
-
+  toggle = true;
+     myservo.write(30); 
 }
 
 void loop() {
@@ -47,9 +49,16 @@ void loop() {
   }
   pulsador = digitalRead(12);   
   if(pulsador==HIGH) { 
-   digitalWrite(13, HIGH);         
-   myservo.write(0);              
-   myservo.write(30);                      
+   if(toggle)
+   {
+     myservo.write(0);
+     toggle = false;
+   }
+   else
+   {
+     myservo.write(30); 
+     toggle = true;
+   }
   }
 }
 
