@@ -10,7 +10,7 @@ int buttonPins[] = { 2, 3, 4, 5, 6, 7, 8 };
 int buttonState = 0;
 
 // el pin del altavoz
-int altavozPins[] = { 9, 10 };
+int altavozPins[] = { 9 };
 
 
 void setup() {
@@ -22,9 +22,7 @@ void setup() {
 
 void loop() {
 
-  // cual altavoz va a sonar; si es true, suena el primero en la lista.
-  bool altavozUno;
-  altavozUno = false; 
+  bool altavozUno = true;
   
   for (int i = 0; i < 7; i++) { // el tamano de notes
     buttonState = digitalRead(buttonPins[i]);
@@ -32,10 +30,10 @@ void loop() {
     if (buttonState == HIGH) {
       if (altavozUno) {
         tone(altavozPins[0], notes[i],20);
-        altavozUno = true;
+        altavozUno = false;
       }
       else {
-        tone(altavozPins[1], notes[i],20);
+        // do nothing
       }    
     }
     
