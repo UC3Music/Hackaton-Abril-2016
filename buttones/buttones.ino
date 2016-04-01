@@ -4,7 +4,8 @@
 
 //-- Servo
 Servo myservo;
-int pulsador=2;  
+int pulsador=LOW;  
+int lastPulsador=LOW;  
 
 // los tonos 
 int notes[] = { NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4, NOTE_B4, NOTE_C5 };
@@ -27,7 +28,7 @@ void setup() {
     pinMode(buttonPins[i], INPUT);
   }
   toggle = true;
-     myservo.write(30); 
+     myservo.write(40); 
 }
 
 void loop() {
@@ -47,19 +48,14 @@ void loop() {
       }    
     }    
   }
-  pulsador = digitalRead(12);   
-  if(pulsador==HIGH) { 
-   if(toggle)
-   {
-     myservo.write(0);
-     toggle = false;
-   }
-   else
-   {
-     myservo.write(30); 
-     toggle = true;
-   }
+  pulsador = digitalRead(12);
+  if((pulsador==HIGH)&&(lastPulsador==LOW)) { 
+    myservo.write(0);           
+    delay(100);  
+    myservo.write(40);                      
+    delay(100);  
   }
+  lastPulsador=pulsador;
 }
 
 
