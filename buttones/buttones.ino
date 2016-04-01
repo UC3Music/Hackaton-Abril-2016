@@ -49,12 +49,7 @@ void loop() {
   if(pulsador==HIGH) { 
    digitalWrite(13, HIGH);         
    myservo.write(0);              
-   delay(5);  
    myservo.write(30);                      
-    }
-  
-  else{                                   
-    digitalWrite(13, LOW);       
   }
 }
 
